@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Contact Disaster News team or view the project report." />
+  <meta name="keywords" content="contact, disaster news, feedback, project report" />
+  <meta name="author" content="Akshey" />
+  <title>Contact — Disaster News</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="brand" aria-label="Disaster News Home">Disaster News</a>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="menuToggle">
+      <span aria-hidden="true">☰</span>
+    </button>
+    <div class="navlinks" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active" aria-current="page">Contact</a>
+    </div>
+  </nav>
+
+  <header class="hero contact-hero">
+    <div class="hero-inner">
+      <h1>Contact & Demo Notes</h1>
+      <p class="muted">Use the contact form to pretend to send feedback (front-end only).</p>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+    <section class="card">
+      <h2>Contact Us</h2>
+      <form id="contactForm" onsubmit="handleSubmit(event);" novalidate>
+        <div class="form-row">
+          <div>
+            <label for="name" class="visually-hidden">Your Name</label>
+            <input 
+              id="name" 
+              name="name" 
+              type="text" 
+              placeholder="Your name" 
+              required 
+              aria-required="true"
+              aria-describedby="name-error"
+            />
+            <span id="name-error" class="error-message visually-hidden" role="alert"></span>
+          </div>
+          <div>
+            <label for="email" class="visually-hidden">Your Email</label>
+            <input 
+              id="email" 
+              name="email" 
+              type="email" 
+              placeholder="Your email" 
+              required 
+              aria-required="true"
+              aria-describedby="email-error"
+            />
+            <span id="email-error" class="error-message visually-hidden" role="alert"></span>
+          </div>
+        </div>
+        <div>
+          <label for="message" class="visually-hidden">Message</label>
+          <textarea 
+            id="message" 
+            name="message" 
+            placeholder="Message" 
+            rows="6"
+            required
+            aria-required="true"
+            aria-describedby="message-error"
+          ></textarea>
+          <span id="message-error" class="error-message visually-hidden" role="alert"></span>
+        </div>
+        <div style="margin-top:12px;">
+          <button type="submit" class="btn">Send Message</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h3>Report</h3>
+      <p class="muted">Project report is included: <a href="assets/project_report.pdf" target="_blank">Open report (PDF)</a></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>© 2025 Disaster News — Demo</div>
+  </footer>
+  <script>
+    // Form validation and submission
+    function handleSubmit(event) {
+      event.preventDefault();
+      const form = event.target;
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const messageInput = document.getElementById('message');
+      
+      // Clear previous errors
+      const errors = form.querySelectorAll('.error-message');
+      errors.forEach(err => {
+        err.textContent = '';
+        err.classList.add('visually-hidden');
+        err.setAttribute('aria-live', 'polite');
+      });
+      
+      let isValid = true;
+      
+      // Validate name
+      if (!nameInput.value.trim()) {
+        showError('name-error', 'Name is required');
+        isValid = false;
+      }
+      
+      // Validate email
+      if (!emailInput.value.trim()) {
+        showError('email-error', 'Email is required');
+        isValid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+        showError('email-error', 'Please enter a valid email address');
+        isValid = false;
+      }
+      
+      // Validate message
+      if (!messageInput.value.trim()) {
+        showError('message-error', 'Message is required');
+        isValid = false;
+      }
+      
+      if (isValid) {
+        alert('Demo: Form submitted successfully! (No backend - this is a demonstration)');
+        form.reset();
+      }
+    }
+    
+    function showError(errorId, message) {
+      const errorElement = document.getElementById(errorId);
+      if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.classList.remove('visually-hidden');
+        errorElement.setAttribute('aria-live', 'assertive');
+      }
+    }
+    
+    // Real-time validation
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('contactForm');
+      if (form) {
+        const inputs = form.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+          input.addEventListener('blur', function() {
+            if (this.hasAttribute('required') && !this.value.trim()) {
+              const errorId = this.getAttribute('aria-describedby');
+              if (errorId) {
+                showError(errorId, 'This field is required');
+              }
+            } else {
+              const errorId = this.getAttribute('aria-describedby');
+              if (errorId) {
+                const errorElement = document.getElementById(errorId);
+                if (errorElement) {
+                  errorElement.textContent = '';
+                  errorElement.classList.add('visually-hidden');
+                }
+              }
+            }
+          });
+          
+          input.addEventListener('input', function() {
+            const errorId = this.getAttribute('aria-describedby');
+            if (errorId) {
+              const errorElement = document.getElementById(errorId);
+              if (errorElement && this.value.trim()) {
+                errorElement.textContent = '';
+                errorElement.classList.add('visually-hidden');
+              }
+            }
+          });
+        });
+      }
+    });
+  </script>
+  <script src="navigation.js"></script>
+</body>
+</html>

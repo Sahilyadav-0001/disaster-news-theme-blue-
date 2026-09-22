@@ -1,0 +1,28 @@
+{
+  "name": "disaster-news-dashboard",
+  "version": "2.0.0",
+  "description": "Real-time disaster monitoring dashboard with live data",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "disaster",
+    "monitoring",
+    "dashboard",
+    "real-time"
+  ],
+  "author": "Akshey",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "axios": "^1.6.0",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
+

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Learn about the Disaster News project - a frontend demo simulating live emergency monitoring." />
+  <meta name="keywords" content="disaster news, about, project information, emergency monitoring" />
+  <meta name="author" content="Akshey" />
+  <title>About — Disaster News</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="brand" aria-label="Disaster News Home">Disaster News</a>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="menuToggle">
+      <span aria-hidden="true">☰</span>
+    </button>
+    <div class="navlinks" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="about.html" class="active" aria-current="page">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <header class="hero about-hero">
+    <div class="hero-inner">
+      <h1>About This Project</h1>
+      <p class="muted">A comprehensive disaster monitoring platform with real-time data integration, interactive visualizations, and AI-powered predictions.</p>
+      <a class="btn" href="assets/project_report.pdf" target="_blank">📄 Open Project Report</a>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+    <section class="card">
+      <div class="card-header">
+        <h2>📋 Project Overview</h2>
+      </div>
+      <p class="muted">Disaster News is a full-stack web application that provides real-time monitoring of natural disasters worldwide. The platform integrates data from multiple sources including USGS (earthquakes), NASA FIRMS (wildfires), and other global monitoring systems to deliver comprehensive disaster information.</p>
+      <p class="muted" style="margin-top: 16px;">Built with modern web technologies including Node.js, Express, Leaflet.js, and Chart.js, the platform features an intuitive dashboard with interactive maps, real-time charts, live feeds, and AI-powered predictions.</p>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <h2>🛠️ Technology Stack</h2>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <div class="tech-icon">🌐</div>
+          <h4>Frontend</h4>
+          <ul class="muted small">
+            <li>HTML5 & CSS3</li>
+            <li>Vanilla JavaScript</li>
+            <li>Leaflet.js (Maps)</li>
+            <li>Chart.js (Visualization)</li>
+          </ul>
+        </div>
+        <div class="tech-item">
+          <div class="tech-icon">⚙️</div>
+          <h4>Backend</h4>
+          <ul class="muted small">
+            <li>Node.js & Express</li>
+            <li>RESTful API</li>
+            <li>Axios (HTTP Client)</li>
+            <li>Node-cron (Scheduling)</li>
+          </ul>
+        </div>
+        <div class="tech-item">
+          <div class="tech-icon">📡</div>
+          <h4>Data Sources</h4>
+          <ul class="muted small">
+            <li>USGS Earthquake API</li>
+            <li>NASA FIRMS API</li>
+            <li>Real-time feeds</li>
+            <li>Automated updates</li>
+          </ul>
+        </div>
+        <div class="tech-item">
+          <div class="tech-icon">✨</div>
+          <h4>Features</h4>
+          <ul class="muted small">
+            <li>Real-time monitoring</li>
+            <li>Interactive maps</li>
+            <li>Data visualization</li>
+            <li>AI predictions</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <h2>👥 Team & Credits</h2>
+      </div>
+      <div class="team-info">
+        <div class="team-member">
+          <div class="member-icon">👨‍💻</div>
+          <h3>Akshey</h3>
+          <p class="muted">Developer & Designer</p>
+          <p class="small muted">Full-stack development, UI/UX design, and system architecture</p>
+        </div>
+      </div>
+      <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <h3 style="margin-bottom: 12px;">🙏 Acknowledgments</h3>
+        <ul class="muted">
+          <li><strong>USGS</strong> - For providing comprehensive earthquake data</li>
+          <li><strong>NASA FIRMS</strong> - For wildfire detection and monitoring data</li>
+          <li><strong>OpenStreetMap</strong> - For map tiles and geographical data</li>
+          <li><strong>Leaflet.js & Chart.js</strong> - For excellent open-source libraries</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <h2>📊 Project Statistics</h2>
+      </div>
+      <div class="stats-display">
+        <div class="stat-box">
+          <div class="stat-number">100+</div>
+          <div class="stat-text">Events Tracked</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">24/7</div>
+          <div class="stat-text">Monitoring</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">5+</div>
+          <div class="stat-text">Data Sources</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">30s</div>
+          <div class="stat-text">Update Interval</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>© 2025 Disaster News — Demo</div>
+  </footer>
+  <script src="navigation.js"></script>
+</body>
+</html>

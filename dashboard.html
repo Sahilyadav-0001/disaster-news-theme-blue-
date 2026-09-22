@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Live disaster monitoring dashboard with real-time alerts, interactive map, and AI predictions." />
+  <meta name="keywords" content="disaster dashboard, emergency monitoring, live alerts, disaster tracking" />
+  <meta name="author" content="Akshey" />
+  <title>Dashboard — Disaster News</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="brand" aria-label="Disaster News Home">Disaster News</a>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="menuToggle">
+      <span aria-hidden="true">☰</span>
+    </button>
+    <div class="navlinks" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html" class="active" aria-current="page">Dashboard</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <header class="hero dash-hero">
+    <div class="hero-inner">
+      <h1>Situation Room — Live Dashboard</h1>
+      <p class="muted">Real-time monitoring of earthquakes, storms, floods, wildfires, and natural disasters worldwide.</p>
+      <div class="hero-stats" id="heroStats" style="margin-top: 20px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        <div class="hero-stat-item">
+          <span class="hero-stat-value" id="totalStat">-</span>
+          <span class="hero-stat-label">Total Events</span>
+        </div>
+        <div class="hero-stat-item severe">
+          <span class="hero-stat-value" id="severeStat">-</span>
+          <span class="hero-stat-label">Severe</span>
+        </div>
+        <div class="hero-stat-item moderate">
+          <span class="hero-stat-value" id="moderateStat">-</span>
+          <span class="hero-stat-label">Moderate</span>
+        </div>
+        <div class="hero-stat-item minor">
+          <span class="hero-stat-value" id="minorStat">-</span>
+          <span class="hero-stat-label">Minor</span>
+        </div>
+      </div>
+      <div id="loadingIndicator" style="display: none; margin-top: 15px; color: #8be0ff;">
+        <span class="spinner"></span> Loading real-time data...
+      </div>
+      <p class="muted small" id="lastUpdate" style="margin-top: 10px; font-size: 12px;">Initializing...</p>
+    </div>
+  </header>
+
+  <main id="main-content" class="container dash-grid">
+    <!-- Statistics Cards -->
+    <section class="panel card stats-card" id="stats">
+      <div class="stats-header">
+        <h2>📊 Real-Time Statistics</h2>
+        <button id="refreshBtn" class="btn small" title="Refresh data">🔄 Refresh</button>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-icon">🌍</div>
+          <div class="stat-content">
+            <div class="stat-value" id="statTotal">0</div>
+            <div class="stat-label">Total Events</div>
+          </div>
+        </div>
+        <div class="stat-item severe">
+          <div class="stat-icon">🔴</div>
+          <div class="stat-content">
+            <div class="stat-value" id="statSevere">0</div>
+            <div class="stat-label">Severe</div>
+          </div>
+        </div>
+        <div class="stat-item moderate">
+          <div class="stat-icon">🟠</div>
+          <div class="stat-content">
+            <div class="stat-value" id="statModerate">0</div>
+            <div class="stat-label">Moderate</div>
+          </div>
+        </div>
+        <div class="stat-item minor">
+          <div class="stat-icon">🔵</div>
+          <div class="stat-content">
+            <div class="stat-value" id="statMinor">0</div>
+            <div class="stat-label">Minor</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="panel card large">
+      <div class="panel-header">
+        <h2>🌍 Global Disaster Map</h2>
+        <div class="map-status" id="mapStatus">Loading map...</div>
+      </div>
+      <div id="map" class="map"></div>
+      <div class="map-legend">
+        <span class="legend-item">
+          <span class="dot severe"></span> Severe
+        </span>
+        <span class="legend-item">
+          <span class="dot moderate"></span> Moderate
+        </span>
+        <span class="legend-item">
+          <span class="dot minor"></span> Minor
+        </span>
+      </div>
+    </section>
+
+    <aside class="panel card feed">
+      <div class="panel-header">
+        <h2>⚡ Live Feed</h2>
+        <div class="feed-badge">Live</div>
+      </div>
+      <div id="feed" class="feed-list">
+        <div class="feed-empty">Loading disaster events...</div>
+      </div>
+      <div class="live-controls">
+        <button id="pauseBtn" class="btn small">⏸️ Pause</button>
+        <button id="clearBtn" class="btn small ghost">🗑️ Clear</button>
+      </div>
+    </aside>
+
+    <section class="panel card chart-card">
+      <div class="panel-header">
+        <h2>📈 Activity Trend (24h)</h2>
+        <span class="small muted">Hourly disaster count</span>
+      </div>
+      <div class="chart-container">
+        <canvas id="trendChart"></canvas>
+      </div>
+    </section>
+
+    <section class="panel card ai-card">
+      <div class="panel-header">
+        <h2>🤖 AI Predictor</h2>
+        <span class="small muted">Machine Learning Forecast</span>
+      </div>
+      <div id="aiBox" class="prediction">
+        <div class="prediction-content">
+          <div class="prediction-value">-</div>
+          <div class="prediction-label">Calculating...</div>
+        </div>
+      </div>
+      <p class="muted small" style="margin-top: 12px;">Based on exponential smoothing and trend analysis</p>
+    </section>
+
+    <section class="panel card chart-card">
+      <div class="panel-header">
+        <h2>🍩 Severity Breakdown</h2>
+        <span class="small muted">Distribution analysis</span>
+      </div>
+      <div class="chart-container">
+        <canvas id="pieChart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>© 2025 Disaster News — Demo</div>
+  </footer>
+
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script src="navigation.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
